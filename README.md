@@ -18,8 +18,7 @@ High School Salmon Cookies project reference repo
 - Create a blog repo to contain all of your reading 
 
   #### Today's reading assignment
-  Intro to the DOM - document object model
-    https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction
+  Intro to the DOM - [document object model](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction)
 
     Example blog entry:
     1. I learned that the DOM underlies the entire webpage and defines every single item on the html document.
@@ -35,3 +34,20 @@ High School Salmon Cookies project reference repo
   3. Copy and paste - Say in comments - “I copied and pasted the following code”
 
   Note: it is not acceptable to copy/paste and annotate the entire project. You will be asked to explain everything. 
+
+  ### 03.04.2021
+
+  - Create a Person object with properties
+  - One of those properties is a function, which is referred to as a method inside of an object
+  - When referring to itself inside of the object, you can use 'this' keyword, i.e., this.name, this.email
+
+  ```
+  let Person = {
+    name: "Calvin",
+    age: 49,
+    getMyInfo: function(){
+      console.log(this.name, this.getMyInfo)
+    }
+  }
+
+  ```
