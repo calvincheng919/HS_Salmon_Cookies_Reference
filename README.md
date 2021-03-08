@@ -51,3 +51,7 @@ High School Salmon Cookies project reference repo
   }
 
   ```
+
+  ### 03.08.2021
+  
+  - live-server . will look for the index.html in the currently 
