@@ -1,18 +1,6 @@
 'use strict';
 
-
 var hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12am', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
-
-// REVIEW: look at the JS object for a store below (seattle)
-// You will be copying this object design, and it's capabilities
-
-// var Person = {
-//   name: "calvin",
-//   age: 49,
-//   walk: function() {
-//     console.log("i'm walking");
-//   }
-// }
 
 var seattle = {
   locationName: 'Seattle', //locationName property
@@ -26,7 +14,7 @@ var seattle = {
     for (var i = 0; i < hours.length; i++) {
       this.customersEachHour.push(random(this.minCustomersPerHour, this.maxCustomersPerHour));
     }
-  }, // a property that does something is called a method
+  }, // a property that does something is called a method. A method is a function inside of an object
 
   calcCookiesEachHour: function () {
     this.calcCustomersEachHour();
@@ -61,9 +49,7 @@ var seattle = {
   }
 };
 
-
-
-// TODO:  copy the object data from above and paste it 4 times below, each time representing a new city:  tokyo, dubai, paris, lima
+// TODO: done. copy the object data from above and paste it 4 times below, each time representing a new city:  tokyo, dubai, paris, lima
 // the minCustomersPerHour, maxCustomersPerHour, avgCookiesPerSale should all have different sales counts
 // you may make these counts up and will also need to update where you "select" or "access" your HTML for each store
 
@@ -92,14 +78,6 @@ var tokyo = {
 
   render() {
     this.calcCookiesEachHour();
-    //We need to understand how render puts items onto the webpage.
-
-    // TODO: Done. access the seattle store HTML list by it's ID - getElementById/querySelector
-
-    // and assign it to the unorderedList variable below
-    // use either getElementById or querySelector to get "Seattle" unordered list
-
-    //getElementById or querySelector
   
     var unorderedList = document.getElementById('tokyo');
 
@@ -114,23 +92,150 @@ var tokyo = {
   }
 
 };
+var dubai = { 
 
-var dubai = { };
+  locationName: 'Dubai', //locationName property
+  minCustomersPerHour: 12, //minCustomersPerHour property
+  maxCustomersPerHour: 51,
+  avgCookiesPerSale: 4,
+  customersEachHour: [],
+  cookiesEachHour: [],
+  totalDailyCookies: 0,
+  calcCustomersEachHour: function () {
+    for (var i = 0; i < hours.length; i++) {
+      this.customersEachHour.push(random(this.minCustomersPerHour, this.maxCustomersPerHour));
+    }
+  }, // a property that does something is called a method
 
-var paris = { };
+  calcCookiesEachHour: function () {
+    this.calcCustomersEachHour();
+    for (var i = 0; i < hours.length; i++) {
+      var oneHour = Math.ceil(this.customersEachHour[i] * this.avgCookiesPerSale);
+      this.cookiesEachHour.push(oneHour);
+      this.totalDailyCookies += oneHour;
+    }
+  },
 
-var lima = { };
+  render() {
+    this.calcCookiesEachHour();
+    var unorderedList = document.getElementById('dubai');
+
+    for (var i = 0; i < hours.length; i++) {
+      var listItem = document.createElement('li');
+      listItem.textContent = hours[i] + ': ' + this.cookiesEachHour[i] + ' cookies';
+      unorderedList.appendChild(listItem);
+    }
+    listItem = document.createElement('li');
+    listItem.textContent = 'Total: ' + this.totalDailyCookies + ' cookies';
+    unorderedList.appendChild(listItem);
+  }
+
+};
+var paris = {
+
+  locationName: 'Paris', //locationName property
+  minCustomersPerHour: 120, //minCustomersPerHour property
+  maxCustomersPerHour: 221,
+  avgCookiesPerSale: 5,
+  customersEachHour: [],
+  cookiesEachHour: [],
+  totalDailyCookies: 0,
+  calcCustomersEachHour: function () {
+    for (var i = 0; i < hours.length; i++) {
+      this.customersEachHour.push(random(this.minCustomersPerHour, this.maxCustomersPerHour));
+    }
+  }, // a property that does something is called a method
+
+  calcCookiesEachHour: function () {
+    this.calcCustomersEachHour();
+    for (var i = 0; i < hours.length; i++) {
+      var oneHour = Math.ceil(this.customersEachHour[i] * this.avgCookiesPerSale);
+      this.cookiesEachHour.push(oneHour);
+      this.totalDailyCookies += oneHour;
+    }
+  },
+
+  render() {
+    this.calcCookiesEachHour();
+  
+    var unorderedList = document.getElementById('paris');
+
+    for (var i = 0; i < hours.length; i++) {
+      var listItem = document.createElement('li');
+      listItem.textContent = hours[i] + ': ' + this.cookiesEachHour[i] + ' cookies';
+      unorderedList.appendChild(listItem);
+    }
+    listItem = document.createElement('li');
+    listItem.textContent = 'Total: ' + this.totalDailyCookies + ' cookies';
+    unorderedList.appendChild(listItem);
+  }
+ };
+var lima = { 
+
+  locationName: 'Lima', //locationName property
+  minCustomersPerHour: 3, //minCustomersPerHour property
+  maxCustomersPerHour: 12,
+  avgCookiesPerSale: 8,
+  customersEachHour: [],
+  cookiesEachHour: [],
+  totalDailyCookies: 0,
+
+  calcCustomersEachHour: function () {
+    for (var i = 0; i < hours.length; i++) {
+      this.customersEachHour.push(random(this.minCustomersPerHour, this.maxCustomersPerHour));
+    }
+  }, // a property that does something is called a method
 
 
+  calcCookiesEachHour: function () {
+
+    this.calcCustomersEachHour();
+    for (var i = 0; i < hours.length; i++) {
+      var oneHour = Math.ceil(this.customersEachHour[i] * this.avgCookiesPerSale);
+      this.cookiesEachHour.push(oneHour);
+      this.totalDailyCookies += oneHour;
+    }
+  },
+
+  render() {
+    this.calcCookiesEachHour();
+
+  
+    var unorderedList = document.getElementById('lima');
+
+    for (var i = 0; i < hours.length; i++) {
+      var listItem = document.createElement('li');
+      listItem.textContent = hours[i] + ': ' + this.cookiesEachHour[i] + ' cookies';
+      unorderedList.appendChild(listItem);
+    }
+    listItem = document.createElement('li');
+    listItem.textContent = 'Total: ' + this.totalDailyCookies + ' cookies';
+    unorderedList.appendChild(listItem);
+  }
+};
+
+//invoke render method to display data on the html screen
+seattle.render();
+tokyo.render();
+dubai.render();
+paris.render();
+lima.render();
 
 
 // what does the random function do?
+
 function random(min, max) {
-  // TODO: "floor" this random number generator
-  return Math.random() * (max - min + 1) + min;
+  // TODO: done "floor" this random number generator
+  return Math.floor(Math.random() * (max - min + 1) + min); //3.3's floor is 3
 }
 
-
+// Math.random() returns .3 
+// max = 10
+// min = 2
+// max-min = 8
+// max-min + 1 = 9
+// 9 + min = 11
+// 11 * 0.3 = 3.3
 
 // somehow looop through all items and print???
 // TODO: list all shop objects in an array
