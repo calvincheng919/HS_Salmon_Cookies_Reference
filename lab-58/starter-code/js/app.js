@@ -1,3 +1,4 @@
+
 'use strict';
 
 var hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12am', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
@@ -176,6 +177,50 @@ var lima = {
   minCustomersPerHour: 3, //minCustomersPerHour property
   maxCustomersPerHour: 12,
   avgCookiesPerSale: 8,
+  customersEachHour: [], //this array gets all of its values from calcCustomersEachHour()
+  cookiesEachHour: [],  //this array gets all of its values from calcCookiesEachHour()
+  totalDailyCookies: 0,
+
+  calcCustomersEachHour: function () {
+    for (var i = 0; i < hours.length; i++) {
+      this.customersEachHour.push(random(this.minCustomersPerHour, this.maxCustomersPerHour));
+    }
+  }, // a property that does something is called a method
+
+
+  calcCookiesEachHour: function () {
+
+    this.calcCustomersEachHour();
+    for (var i = 0; i < hours.length; i++) {
+      var oneHour = Math.ceil(this.customersEachHour[i] * this.avgCookiesPerSale);
+      this.cookiesEachHour.push(oneHour);
+      this.totalDailyCookies = this.totalDailyCookies + oneHour; //this is doing a running tally of the cookies sold
+    }
+  },
+
+  render() {
+    this.calcCookiesEachHour();
+
+  
+    var unorderedList = document.getElementById('lima');
+
+    for (var i = 0; i < hours.length; i++) {
+      var listItem = document.createElement('li');
+      listItem.textContent = hours[i] + ': ' + this.cookiesEachHour[i] + ' cookies';
+      unorderedList.appendChild(listItem);
+    }
+    listItem = document.createElement('li');
+    listItem.textContent = 'Total: ' + this.totalDailyCookies + ' cookies';
+    unorderedList.appendChild(listItem);
+  }
+};
+
+var hongkong = { 
+
+  locationName: 'Hong Kong', //locationName property
+  minCustomersPerHour: 12, //minCustomersPerHour property
+  maxCustomersPerHour: 22,
+  avgCookiesPerSale: 10,
   customersEachHour: [],
   cookiesEachHour: [],
   totalDailyCookies: 0,
@@ -201,7 +246,7 @@ var lima = {
     this.calcCookiesEachHour();
 
   
-    var unorderedList = document.getElementById('lima');
+    var unorderedList = document.getElementById('hongkong');
 
     for (var i = 0; i < hours.length; i++) {
       var listItem = document.createElement('li');
@@ -214,16 +259,8 @@ var lima = {
   }
 };
 
-//invoke render method to display data on the html screen
-seattle.render();
-tokyo.render();
-dubai.render();
-paris.render();
-lima.render();
-
-
 // what does the random function do?
-
+// gives you a random number between the min and max
 function random(min, max) {
   // TODO: done "floor" this random number generator
   return Math.floor(Math.random() * (max - min + 1) + min); //3.3's floor is 3
@@ -237,11 +274,22 @@ function random(min, max) {
 // 9 + min = 11
 // 11 * 0.3 = 3.3
 
+
+
 // somehow looop through all items and print???
-// TODO: list all shop objects in an array
-var allShops = [];
+// TODO: done - list all shop objects in an array
 
 
+//******* */ this is an example of an array - nothing to do with salmon cookies
+var myArray = [5,6,7,10];
+for (let i = 0; i < myArray.length; i++) {
+  console.log(myArray[2]); //this will console log 7 for 4 times
+  console.log(myArray[i]); //this will console log the contents of that position, 5, 6, 7, 10
+}
+//************************************** */
+
+
+var allShops = [hongkong, seattle, tokyo, dubai, paris, lima];
 
 // We will deconstruct and understand how exactly this renders html on to the page next week.
 (function renderAllShops() {
@@ -249,3 +297,5 @@ var allShops = [];
     allShops[i].render();
   }
 })();
+
+//renderAllShops structure is called an IIFE - immediately invoked function expression
