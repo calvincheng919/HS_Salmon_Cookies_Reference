@@ -3,6 +3,9 @@
 
 var hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12am', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
 
+
+
+
 var seattle = {
   locationName: 'Seattle', //locationName property
   minCustomersPerHour: 23, //minCustomersPerHour property
@@ -199,19 +202,36 @@ var lima = {
   },
 
   render() {
-    this.calcCookiesEachHour();
+    // start the domino of function calls
+    lima.calcCookiesEachHour();
+    //once the domino of functions finish running, all of the data in the arrays will be populated.
 
-  
-    var unorderedList = document.getElementById('lima');
+
+    //Hey, I want to put all that data/numbers onto the html page.
+    // var unorderedList = document.getElementById('lima');
+    var limaUnorderedList = document.querySelector('#lima')
+
+    // pseudocode
+    // use the hours array, determine the lengh
+    // loop through the hours array 
+    // at each index (loop), i want to output the data from my object to the html page
+
 
     for (var i = 0; i < hours.length; i++) {
+
       var listItem = document.createElement('li');
+
       listItem.textContent = hours[i] + ': ' + this.cookiesEachHour[i] + ' cookies';
-      unorderedList.appendChild(listItem);
+      //'7am: 258 cookies 
+      limaUnorderedList.appendChild(listItem);
     }
+    // the previous for loop adds all the list items as children of limaUnorderedList
+
+
     listItem = document.createElement('li');
     listItem.textContent = 'Total: ' + this.totalDailyCookies + ' cookies';
-    unorderedList.appendChild(listItem);
+    // 'Total: 1245 cookies
+    limaUnorderedList.appendChild(listItem);
   }
 };
 
