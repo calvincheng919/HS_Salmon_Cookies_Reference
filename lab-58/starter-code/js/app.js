@@ -219,14 +219,13 @@ var lima = {
 
     for (var i = 0; i < hours.length; i++) {
 
+      // declare listItem to hold the li element from sales.html
       var listItem = document.createElement('li');
-
       listItem.textContent = hours[i] + ': ' + this.cookiesEachHour[i] + ' cookies';
       //'7am: 258 cookies 
       limaUnorderedList.appendChild(listItem);
     }
     // the previous for loop adds all the list items as children of limaUnorderedList
-
 
     listItem = document.createElement('li');
     listItem.textContent = 'Total: ' + this.totalDailyCookies + ' cookies';
