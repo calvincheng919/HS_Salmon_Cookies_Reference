@@ -37,10 +37,10 @@ CookieStand.prototype.calcCookiesEachHour = function() {
     this.calcCustomersEachHour();
 
     for (let i = 0; i < hours.length; i++) {
-      let oneHour = parseFloat(Math.ceil(this.customersEachHour[i] * this.avgCookiesPerSale));
-      this.cookiesEachHour.push(parseFloat(oneHour));
+      let oneHour = Math.ceil(this.customersEachHour[i] * this.avgCookiesPerSale);
+      this.cookiesEachHour.parseFloat(oneHour);
       console.log(typeof this.cookiesEachHour[i])
-      this.totalDailyCookies += parseFloat(oneHour);
+      this.totalDailyCookies += oneHour;
       console.log(typeof this.totalDailyCookies)
       console.log(this.totalDailyCookies)
     }
