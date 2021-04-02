@@ -1,21 +1,8 @@
-// javascript engine parses the file from top to bottom.
-
-// along the way, it takes note of variable declarations
-// takes note of function declarations
-// stores a bunch of stuff in memory
 
 'use strict';
 
 var hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12am', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
 
-// Whenever possible DO NOT REPEAT YOURSELF
-// D.R.Y. principle
-
-//We are going to create a template. 
-//The template will give us the abilit to create as many cookie stands(shops) as we have numbers for
-
-//the template function name is capitalized.
-// Constructor Function
 function CookieStand(locationName, minCustomersPerHour, maxCustomersPerHour, avgCookiesPerSale){
   this.locationName = locationName
   this.minCustomersPerHour = minCustomersPerHour
@@ -23,31 +10,29 @@ function CookieStand(locationName, minCustomersPerHour, maxCustomersPerHour, avg
   this.avgCookiesPerSale = avgCookiesPerSale
   this.customersEachHour = []
   this.cookiesEachHour = []
-  this.totalDailyCookies = []
-  // CookieStand.all.push(this); //
-  //Still need to define the methods for calculating customersEachHour, cookiesEachHour, Total, and render
+  this.totalDailyCookies = 0
 }
 
 CookieStand.prototype.calcCustomersEachHour = function() {
     for (var i = 0; i < hours.length; i++) {
       this.customersEachHour.push(random(this.minCustomersPerHour, this.maxCustomersPerHour));
     }
+    // console.log(this.customersEachHour)
 }
 CookieStand.prototype.calcCookiesEachHour = function() {
     this.calcCustomersEachHour();
-
     for (let i = 0; i < hours.length; i++) {
       let oneHour = Math.ceil(this.customersEachHour[i] * this.avgCookiesPerSale);
-      this.cookiesEachHour.parseFloat(oneHour);
-      console.log(typeof this.cookiesEachHour[i])
+      // console.log(oneHour)
+      this.cookiesEachHour.push(oneHour);
       this.totalDailyCookies += oneHour;
-      console.log(typeof this.totalDailyCookies)
-      console.log(this.totalDailyCookies)
     }
+
+    // console.log(this.cookiesEachHour)
 }
 CookieStand.prototype.render = function() {
     this.calcCookiesEachHour();
-    // console.log(this.locationName.toLowerCase())
+    // console.log(this.calcCookiesEachHour())
     
     var unorderedList = document.getElementById(this.locationName.toLowerCase());
     for (var i = 0; i < hours.length; i++) {
@@ -58,32 +43,16 @@ CookieStand.prototype.render = function() {
     listItem = document.createElement('li');
     listItem.textContent = 'Total: ' + this.totalDailyCookies + ' cookies';
     unorderedList.appendChild(listItem);
+
 }
 
-
-
 var seattle = new CookieStand('Seattle', 12, 45, 4);
-//when we create new object from a constructor, it is said we've "instantiated" it
-// seattle is a new instance of the CookieStand constructor
-var lima = new CookieStand('Lima',23, 60, 4.6 );
-var rome = new CookieStand('Rome',45, 120, 12 );
-var thailand = new CookieStand('Thailand',45, 120, 12 );
-var hongkong = new CookieStand('Hong Kong',55, 76, 3 );
-var dubai = new CookieStand('Dubai',55, 76, 3 );
-var tokyo = new CookieStand('Tokyo',65, 71, 4 );
-var paris = new CookieStand('Paris',50, 66, 5 );
-
-
-// console.log(seattle.locationName, seattle.minCustomersPerHour)
-// console.log(lima.locationName, lima.minCustomersPerHour)
-// console.log(rome.locationName, rome.minCustomersPerHour)
-// console.log(thailand.locationName, thailand.minCustomersPerHour)
 
 function random(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min); 
 }
 
-var allShops = [hongkong, seattle, tokyo, dubai, paris, lima, rome, thailand];
+// var allShops = [hongkong, seattle, tokyo, dubai, paris, lima, rome, thailand, bend];
 
 // (function renderAllShops() {
 //   for (var i = 0; i < allShops.length; i++) {
@@ -92,4 +61,3 @@ var allShops = [hongkong, seattle, tokyo, dubai, paris, lima, rome, thailand];
 // })();
 
 seattle.render();
-// tokyo.render();
